@@ -8,14 +8,15 @@
   Build Tools for VMware Aria
   Copyright 2023 VMware, Inc.
   
-  This product is licensed to you under the BSD-2 license (the "License"). You may not use this product except in compliance with the BSD-2 License.  
+  This product is licensed to you under the BSD-2 license (the "License"). You may not use this product except in compliance with the BSD-2 License.
   
   This product may include a number of subcomponents with separate copyright notices and license terms. Your use of these subcomponents is subject to the terms and conditions of the subcomponent's license, as noted in the LICENSE file.
   #L%
   -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
@@ -55,7 +56,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.6.0</version>
                 <executions>
                     <execution>
                         <id>unpack-keystore</id>
@@ -80,7 +81,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.6.0</version>
                 <executions>
                     <execution>
                         <id>copy-vro-dependencies</id>
@@ -116,7 +117,7 @@
         <keystoreArtifactId>archetype.keystore</keystoreArtifactId>
         <keystoreVersion>2.0.0</keystoreVersion>
         <vroPrivateKeyPem>target/${keystoreArtifactId}-${keystoreVersion}/private_key.pem</vroPrivateKeyPem>
-		<vroCertificatePem>target/${keystoreArtifactId}-${keystoreVersion}/cert.pem</vroCertificatePem>
-		<vroKeyPass>VMware1!</vroKeyPass>
+        <vroCertificatePem>target/${keystoreArtifactId}-${keystoreVersion}/cert.pem</vroCertificatePem>
+        <vroKeyPass>VMware1!</vroKeyPass>
     </properties>
 </project>

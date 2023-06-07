@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<artifactId>iac</artifactId>
-		<groupId>com.vmware.pscoe</groupId>
-		<version>${revision}</version>
-		<relativePath>../../pom.xml</relativePath>
-	</parent>
+    <parent>
+        <artifactId>iac</artifactId>
+        <groupId>com.vmware.pscoe</groupId>
+        <version>${revision}</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
 
     <groupId>com.vmware.pscoe.npm</groupId>
     <artifactId>lib</artifactId>
@@ -24,7 +25,7 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>exec-maven-plugin</artifactId>
-                    <version>1.6.0</version>
+                    <version>3.1.0</version>
                     <executions>
                         <!--
                         Validate: validate the project is correct and all necessary information is available.
@@ -96,7 +97,7 @@
                                 </arguments>
                             </configuration>
                         </execution>
-						<!--
+                        <!--
                         Test: test the source code of the project.
                         Perform 'npm test'
                         -->
@@ -108,7 +109,7 @@
                             <phase>test</phase>
                             <configuration>
                                 <executable>npm</executable>
-								<skip>${skipTests}</skip>
+                                <skip>${skipTests}</skip>
                                 <arguments>
                                     <argument>test</argument>
                                 </arguments>
@@ -154,7 +155,7 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>3.1.0</version>
+                    <version>3.4.0</version>
                     <extensions>true</extensions>
                     <executions>
                         <execution>
@@ -212,7 +213,7 @@
         <sonar.sources>src</sonar.sources>
         <sonar.language>ts</sonar.language>
         <sonar.javascript.lcov.reportPaths>./target/lcov.info</sonar.javascript.lcov.reportPaths>
-		<main.basedir>${project.parent.basedir}</main.basedir>
+        <main.basedir>${project.parent.basedir}</main.basedir>
     </properties>
 
 </project>

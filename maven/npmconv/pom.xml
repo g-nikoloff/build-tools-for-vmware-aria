@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-		<artifactId>iac</artifactId>
-		<groupId>com.vmware.pscoe</groupId>
-		<version>${revision}</version>
-		<relativePath>../../pom.xml</relativePath>
-	</parent>
+        <artifactId>iac</artifactId>
+        <groupId>com.vmware.pscoe</groupId>
+        <version>${revision}</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
 
     <groupId>com.vmware.pscoe.npm</groupId>
     <artifactId>base-package</artifactId>
@@ -21,7 +22,10 @@
         <npmconvAuxIncludeArgs>--auxInclude src/*.ts:src</npmconvAuxIncludeArgs>
         <npmconvTsConfigArgs></npmconvTsConfigArgs>
         <npmconvAnyOtherArgs>--vv --toolchainVersion ${revision}</npmconvAnyOtherArgs>
-        <npmconvArgs>${project.artifactId}@${npmPackageVersion} -c ${project.groupId} -o target/vro-prj ${npmconvSrcArgs} ${npmconvTsConfigArgs} ${npmconvArtifactDepsMapArgs} ${nmpconvCompileMvnDepsArgs} ${npmconvAuxMvnDepsArgs} ${npmconvAuxIncludeArgs} ${npmconvAnyOtherArgs}</npmconvArgs>
+        <npmconvArgs>${project.artifactId}@${npmPackageVersion} -c ${project.groupId} -o
+            target/vro-prj ${npmconvSrcArgs} ${npmconvTsConfigArgs} ${npmconvArtifactDepsMapArgs}
+            ${nmpconvCompileMvnDepsArgs} ${npmconvAuxMvnDepsArgs} ${npmconvAuxIncludeArgs}
+            ${npmconvAnyOtherArgs}</npmconvArgs>
     </properties>
 
     <build>
@@ -40,31 +44,39 @@
                             <configuration>
                                 <language>javascript</language>
                                 <script>
-                    var depsMaps = [];
-                    var compileDeps = [];
-                    var auxDeps = [];
+                                    var depsMaps = [];
+                                    var compileDeps = [];
+                                    var auxDeps = [];
 
-                    for (var i = 0; i &lt; project.getDependencies().size(); i++) {
-                        var dep = project.getDependencies().get(i);
-                        var mvnGroupId = dep.getGroupId();
-                        var mvnArtifactId = dep.getArtifactId();
-                        var mvnVersion = dep.getVersion();
-                        var mvnType = dep.getType();
-                        var scope = dep.getScope();
+                                    for (var i = 0; i &lt; project.getDependencies().size(); i++) {
+                                    var dep = project.getDependencies().get(i);
+                                    var mvnGroupId = dep.getGroupId();
+                                    var mvnArtifactId = dep.getArtifactId();
+                                    var mvnVersion = dep.getVersion();
+                                    var mvnType = dep.getType();
+                                    var scope = dep.getScope();
 
-                        if ("compile".equals(scope)) {
-                            compileDeps.push("--compileMvnDeps " + mvnGroupId + ":" + mvnArtifactId + ":" + mvnVersion + ":" + (mvnType || "package"));
-                        } else if (scope &amp;&amp; scope.indexOf("npm^") === 0) {
-                            var npmPackage = scope.substring(4);
-                            depsMaps.push("-d " + npmPackage + "^" + mvnGroupId + ":" + mvnArtifactId + ":" + mvnVersion + ":" + (mvnType || "package"));
-                        } else {
-                            auxDeps.push("--auxMvnDeps " + mvnGroupId + ":" + mvnArtifactId + ":" + mvnVersion + ":" + (mvnType || "package"));
-                        }
-                    }
+                                    if ("compile".equals(scope)) {
+                                    compileDeps.push("--compileMvnDeps " + mvnGroupId + ":" +
+                                    mvnArtifactId + ":" + mvnVersion + ":" + (mvnType ||
+                                    "package"));
+                                    } else if (scope &amp;&amp; scope.indexOf("npm^") === 0) {
+                                    var npmPackage = scope.substring(4);
+                                    depsMaps.push("-d " + npmPackage + "^" + mvnGroupId + ":" +
+                                    mvnArtifactId + ":" + mvnVersion + ":" + (mvnType ||
+                                    "package"));
+                                    } else {
+                                    auxDeps.push("--auxMvnDeps " + mvnGroupId + ":" + mvnArtifactId
+                                    + ":" + mvnVersion + ":" + (mvnType || "package"));
+                                    }
+                                    }
 
-                    project.getProperties().put("npmconvArtifactDepsMapArgs", depsMaps.join(" "));
-                    project.getProperties().put("nmpconvCompileMvnDepsArgs", compileDeps.join(" "));
-                    project.getProperties().put("npmconvAuxMvnDepsArgs", auxDeps.join(" "));
+                                    project.getProperties().put("npmconvArtifactDepsMapArgs",
+                                    depsMaps.join(" "));
+                                    project.getProperties().put("nmpconvCompileMvnDepsArgs",
+                                    compileDeps.join(" "));
+                                    project.getProperties().put("npmconvAuxMvnDepsArgs",
+                                    auxDeps.join(" "));
                                 </script>
                             </configuration>
                         </execution>
@@ -80,7 +92,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>3.0.0</version>
+                    <version>3.6.0</version>
                     <executions>
                         <execution>
                             <id>copy-vro-dependencies</id>
@@ -105,7 +117,7 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>exec-maven-plugin</artifactId>
-                    <version>1.3.2</version>
+                    <version>3.1.0</version>
                     <executions>
                         <execution>
                             <id>npm install</id>
@@ -152,7 +164,7 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>1.7</version>
+                    <version>3.4.0</version>
                     <extensions>true</extensions>
                     <executions>
                         <execution>
@@ -164,11 +176,13 @@
                             <configuration>
                                 <artifacts>
                                     <artifact>
-                                        <file>target/vro-prj/${project.artifactId}/target/${project.groupId}.${project.artifactId}-${npmPackageVersion}.package</file>
+                                        <file>
+                                            target/vro-prj/${project.artifactId}/target/${project.groupId}.${project.artifactId}-${npmPackageVersion}.package</file>
                                         <type>package</type>
                                     </artifact>
                                     <artifact>
-                                        <file>target/vro-prj/${project.artifactId}/target/vro-types/types-${project.groupId}.${project.artifactId}-${npmPackageVersion}.tgz</file>
+                                        <file>
+                                            target/vro-prj/${project.artifactId}/target/vro-types/types-${project.groupId}.${project.artifactId}-${npmPackageVersion}.tgz</file>
                                         <type>tgz</type>
                                     </artifact>
                                 </artifacts>
